@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
 import {View, Text, FlatList, RefreshControl, TouchableOpacity} from "react-native";
-import {Checkbox} from "native-base";
+import {Checkbox, Input, VStack} from "native-base";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faApple, faFacebook, faGoogle, faLinux, faTiktok, faWindows} from "@fortawesome/free-brands-svg-icons";
-import {faAngleRight, faBitcoinSign, faGlobe} from "@fortawesome/free-solid-svg-icons";
+import {faAngleRight, faBitcoinSign, faGlobe, faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {useNavigation} from "@react-navigation/native";
 import {styles} from "../styles/styles";
 import Loader from "../components/Loader";
@@ -45,6 +45,27 @@ const ProfilesScreen = ({}) => {
 
     return (
         <View style={{...styles.container}}>
+            <VStack w="100%" space={5} alignSelf="center" alignItems="center">
+                <Input style={styles.searchForm} placeholder="Search"
+                       variant="filled"
+                       width="92%"
+                       borderWidth='2'
+                       borderColor='#414452'
+                       borderRadius="10"
+                       marginTop="5"
+                       fontSize="14"
+                       fontWeight="600"
+                       py="2"
+                       px="3"
+                       InputLeftElement={
+                           <FontAwesomeIcon icon={faMagnifyingGlass}
+                                            style={{
+                                                marginLeft: 5,
+                                                color: '#B645EE'
+                                            }}
+                           />
+                       } />
+            </VStack>
             <FlatList
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchProfiles} />}
                 data={items}

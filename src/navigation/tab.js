@@ -1,6 +1,6 @@
 import * as React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import SettingsScreen from "../screens/SettingsScreen";
+import AccountScreen from "../screens/AccountScreen";
 import ProfilesScreen from "../screens/ProfilesScreen";
 import TeamScreen from "../screens/TeamScreen";
 import LibraryScreen from "../screens/LibraryScreen";
@@ -10,7 +10,7 @@ import {
     faCirclePlus, faEllipsis,
     faEllipsisVertical, faFilter,
     faGear,
-    faLink,
+    faLink, faPersonHarassing, faPlus,
     faUser,
     faWindowRestore
 } from "@fortawesome/free-solid-svg-icons";
@@ -76,13 +76,13 @@ const Tabs = () => {
                         ...styles.tabBarView
                     }}>
                         <FontAwesomeIcon
-                            icon={faUser}
+                            icon={faPersonHarassing}
                             color={focused ? '#B645EE' : 'white'}
                             size={25}
                         />
                         <Text style={{
                             ...styles.tabBarText
-                        }}>Users</Text>
+                        }}>Team</Text>
                     </View>
                 ),
                 headerRight: () => (
@@ -92,6 +92,17 @@ const Tabs = () => {
                             size={24}
                             style={{
                                 right: 20,
+                            }}
+                        />
+                    </View>
+                ),
+                headerLeft: () => (
+                    <View>
+                        <FontAwesomeIcon
+                            icon={faPlus}
+                            size={24}
+                            style={{
+                                left: 20
                             }}
                         />
                     </View>
@@ -151,19 +162,30 @@ const Tabs = () => {
                     </View>
                 )
             }}/>
-            <Tab.Screen name={'Settings'} component={SettingsScreen} options={{
+            <Tab.Screen name={'Account'} component={AccountScreen} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{
                         ...styles.tabBarView
                     }}>
                         <FontAwesomeIcon
-                            icon={faGear}
+                            icon={faUser}
                             color={focused ? '#B645EE' : 'white'}
                             size={25}
                         />
                         <Text style={{
                             ...styles.tabBarText
-                        }}>Settings</Text>
+                        }}>Account</Text>
+                    </View>
+                ),
+                headerRight: () => (
+                    <View>
+                        <FontAwesomeIcon
+                            icon={faGear}
+                            size={24}
+                            style={{
+                                right: 20,
+                            }}
+                        />
                     </View>
                 )
             }}/>

@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     },
     icon: {
         color: '#414452',
+        zIndex: 2
         // justifyContent: 'center'
     },
     checkbox: {
@@ -58,6 +59,12 @@ export const styles = StyleSheet.create({
         flex: 2,
         maxWidth: 25,
         marginRight: 3
+    },
+    proxyType: {
+        flex: 2,
+        maxWidth: 25,
+        marginRight: 8,
+        zIndex: 2
     },
     profileMainWebsite: {
         flex: 3,
@@ -72,13 +79,75 @@ export const styles = StyleSheet.create({
         fontWeight: "bold",
         justifyContent: "center"
     },
-    profileCreatedAt: {
-        fontSize: 12,
-        marginTop: 2,
-        color: "grey"
+    userName: {
+        fontSize: 14,
+        justifyContent: "center"
     },
+    // profileCreatedAt: {
+    //     fontSize: 12,
+    //     marginTop: 2,
+    //     color: "grey"
+    // },
     profileMoreInfo: {
         flex: 5,
-        maxWidth: 5,
+        maxWidth: 10,
+    },
+    proxyMoreInfo: {
+        flex: 5,
+        maxWidth: 25,
+    },
+    accountContainer: {
+        backgroundColor: '#1B2A3A',
+        flex: 1,
+        alignItems: 'center',
+        flexDirection: "column",
+    },
+    accountAvatar: {
+        padding: 5,
+        backgroundColor: '#1B2A3A'
+    },
+    avatarContainer: {
+        flex: 1,
+        alignItems: 'center',
+    },
+    displayNameText: {
+        marginTop: 10,
+        fontSize: 24,
+        fontWeight: "bold",
+        color: 'white'
+    },
+    userEmailText: {
+      color: 'white'
+    },
+    mainAccountInfo: {
+        backgroundColor: '#ECEEF4',
+        flex: 2,
+        alignSelf: "stretch",
+        borderRadius: 30,
+        alignItems: "center"
+    },
+    mainAccountInfoCard: {
+        backgroundColor: 'white',
+        width: 350,
+        // height: 80,
+        borderRadius: 20,
+        shadowColor: 'gray',
+        shadowOffset: {
+            width: 0,
+            height: 0
+        },
+        shadowOpacity: 3.5,
+        shadowRadius: 7,
+        elevation: 0,
+        marginTop: 20,
+        padding: 20,
+    },
+    mainAccountInfoCardTitle: {
+        fontSize: 16,
+        // fontWeight: "bold"
     }
+    // searchForm: {
+    //     height: 40,
+    //     marginTop: 5
+    // }
 });
