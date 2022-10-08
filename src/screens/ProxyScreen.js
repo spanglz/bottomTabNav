@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {View, Text, RefreshControl, TouchableOpacity, FlatList} from "react-native";
-import {Checkbox, VStack, Input, Badge} from "native-base";
+import {Checkbox, VStack, Input, Menu, Pressable, Box} from "native-base";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faSocks as faNew} from "@fortawesome/free-regular-svg-icons";
+import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {
-    faAngleRight,
+    faAngleRight, faEllipsis,
     faEthernet,
     faMagnifyingGlass,
     faSocks,
@@ -14,6 +14,28 @@ import {useNavigation} from "@react-navigation/native";
 import axios from "axios";
 import Loader from "../components/Loader";
 import {styles} from "../styles/styles";
+
+export const Dropdown = () => {
+    return <Box w="90%" alignItems="flex-end">
+        <Menu w="190" trigger={triggerProps => {
+            return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
+                <Box>
+                    <FontAwesomeIcon
+                        icon={faEllipsisH}
+                        size={24}
+                        style={{
+                            right: 20,
+                        }}
+                    />
+                </Box>
+            </Pressable>;
+        }}>
+            <Menu.Item>Arial</Menu.Item>
+            <Menu.Item>Nunito Sans</Menu.Item>
+            <Menu.Item>Roboto</Menu.Item>
+        </Menu>
+    </Box>;
+}
 
 const ProxyScreen = ({navigation}) => {
 
@@ -46,24 +68,6 @@ const ProxyScreen = ({navigation}) => {
             });
     };
 
-    const HttpsProxyAgent = require('https-proxy-agent');
-
-    const axiosDefaultConfig = {
-        baseURL: 'https://ipinfo.io/json',
-        proxy: false,
-        httpsAgent: new HttpsProxyAgent('socks5://176.53.134.122:52196:5bCa73xN:PPwnBsxK')
-    };
-
-    const axios = require ('axios').create(axiosDefaultConfig);
-    axios.get()
-        .then(function (response) {
-            console.log('Response with axios was ok: ' + response.status);
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-
-    React.useEffect(checkProxy, []);
     React.useEffect(fetchProfiles, []);
     if (isLoading) {
         return <Loader />;
@@ -73,7 +77,7 @@ const ProxyScreen = ({navigation}) => {
         <View style={styles.container}>
                 <VStack w="100%" space={5} alignSelf="center" alignItems="center">
                     <Input placeholder="Search"
-                           variant="filled"
+                           // variant="filled"
                            width="92%"
                            borderWidth='2'
                            borderColor='#414452'

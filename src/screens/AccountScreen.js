@@ -1,25 +1,38 @@
 import React, {useState} from "react";
-import {View, Text, RefreshControl, TouchableOpacity} from "react-native";
-import {Checkbox, VStack, Input, Badge, Avatar, Progress} from "native-base";
+import {View, Text, RefreshControl, TouchableOpacity, Image} from "react-native";
+import {Checkbox, VStack, Input, Badge, Avatar, Progress, Box, Heading} from "native-base";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {
-    faAngleRight,
-    faEthernet,
-    faMagnifyingGlass,
-    faSocks,
-    faTerminal
-} from "@fortawesome/free-solid-svg-icons";
 import {useNavigation} from "@react-navigation/native";
 import axios from "axios";
 import Loader from "../components/Loader";
 import {styles} from "../styles/styles";
+import CircularProgress from "react-native-circular-progress-indicator";
 
 const AccountScreen = ({navigation}) => {
 
     const navigate = useNavigation();
     const [isLoading, setIsLoading] = useState(false);
     const [items, setItems] = useState();
-    const [search, setSearch] = useState('');
+
+    const Example = () => {
+        return <Box>
+            <Box alignSelf="center" bg="yellow.500" width={48} height={32} shadow={1} br={20} p={5} rounded={'xl'}_text={{
+                fontSize: "md",
+                fontWeight: "medium",
+                color: "green.600",
+                letterSpacing: "lg"
+            }}>
+                <Heading size="sm" color={'blueGray.400'} >
+                    Your plan
+                </Heading>
+                Base
+                <Heading size="sm">
+                    Profiles count
+                </Heading>
+                63 of 100
+            </Box>
+        </Box>;
+    };
 
 
     // get proxy list without pagination
@@ -56,27 +69,23 @@ const AccountScreen = ({navigation}) => {
     return (
         <View style={styles.accountContainer}>
             <View style={styles.avatarContainer}>
-                <Avatar size="2xl" borderWidth="2" borderColor="#B645EE" style={styles.accountAvatar} mt="10" source={{
-                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
-                }}></Avatar>
-                <Text style={styles.displayNameText}>Main User</Text>
-                <Text style={styles.userEmailText}>companion@app.com</Text>
+                <Text style={styles.displayNameText}>Hi, username! 👋</Text>
+                <Image style={styles.accountAvatar} source={require('../img/bg.png')}/>
             </View>
-            <View style={styles.mainAccountInfo}>
-                <View style={styles.mainAccountInfoCard}>
-                    <Text style={styles.mainAccountInfoCardTitle}>Your plan: Base</Text>
-                    <Text style={styles.mainAccountInfoCardTitle}>Expires: 2022-11-04 09:48:06</Text>
-                </View>
-                <View style={styles.mainAccountInfoCard}>
-                    <Text style={styles.mainAccountInfoCardTitle}>Profiles count: Base</Text>
-                    <Progress value={100} mx="5" />
-                </View>
-                <View style={styles.mainAccountInfoCard}>
-                    <Text>Тариф Base</Text>
-                </View>
-                <View style={styles.mainAccountInfoCard}>
-                    <Text>Тариф Base</Text>
-                </View>
+            <View style={styles.profilesCountChartContainer}>
+                <CircularProgress style={styles.profilesCountChartCircular}
+                    value={63}
+                    radius={75}
+                    inActiveStrokeOpacity={0.3}
+                    activeStrokeWidth={20}
+                    inActiveStrokeWidth={20}
+                    activeStrokeColor={'#8A32CF'}
+                    inActiveStrokeColor={'#9655FFD6'}
+                    progressValueColor={'#9655FFD6'}
+                />
+            <View style={styles.profilesCountChartInfo}>
+                <Example  />
+            </View>
             </View>
         </View>
     );

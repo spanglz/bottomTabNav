@@ -4,7 +4,7 @@ import AccountScreen from "../screens/AccountScreen";
 import ProfilesScreen from "../screens/ProfilesScreen";
 import TeamScreen from "../screens/TeamScreen";
 import LibraryScreen from "../screens/LibraryScreen";
-import {StyleSheet, Text, View} from "react-native";
+import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {
     faCirclePlus, faEllipsis,
@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ProxyScreen from "../screens/ProxyScreen";
 import {styles} from "../styles/styles";
+import {Dropdown} from "../screens/ProxyScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -140,15 +141,7 @@ const Tabs = () => {
                     </View>
                 ),
                 headerRight: () => (
-                    <View>
-                        <FontAwesomeIcon
-                            icon={faEllipsis}
-                            size={24}
-                            style={{
-                                right: 20,
-                            }}
-                        />
-                    </View>
+                        <Dropdown />
                 ),
                 headerLeft: () => (
                     <View>

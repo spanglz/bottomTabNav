@@ -43,7 +43,7 @@ export const styles = StyleSheet.create({
         padding: 15,
         border: "1 solid black",
         height: 70,
-        backgroundColor: '##ECEEF4'
+        backgroundColor: '#ECEEF4'
     },
     icon: {
         color: '#414452',
@@ -97,24 +97,31 @@ export const styles = StyleSheet.create({
         maxWidth: 25,
     },
     accountContainer: {
-        backgroundColor: '#1B2A3A',
+        backgroundColor: '#ECEEF4',
         flex: 1,
-        alignItems: 'center',
-        flexDirection: "column",
+        flexDirection: "column"
     },
     accountAvatar: {
         padding: 5,
-        backgroundColor: '#1B2A3A'
+        backgroundColor: '#1B2A3A',
+        width: 70,
+        height: 70,
+        borderRadius: 15,
+        alignContent: "center"
     },
     avatarContainer: {
-        flex: 1,
-        alignItems: 'center',
+        marginTop: 20,
+        flexDirection: "row",
+        padding: 20,
+        alignItems: "center"
     },
     displayNameText: {
         marginTop: 10,
-        fontSize: 24,
+        fontSize: 32,
         fontWeight: "bold",
-        color: 'white'
+        color: 'black',
+        flex: 1,
+        alignContent: "center"
     },
     userEmailText: {
       color: 'white'
@@ -145,7 +152,36 @@ export const styles = StyleSheet.create({
     mainAccountInfoCardTitle: {
         fontSize: 16,
         // fontWeight: "bold"
-    }
+    },
+    profilesCountChartContainer: {
+        flexDirection: "row",
+        padding: 20,
+        alignItems: 'center',
+        justifyContent: "space-between"
+
+    },
+    profilesCountChartCircular: {
+        flex: 1,
+    },
+    profilesCountChartInfo: {
+        // marginLeft: 30,
+        // // backgroundColor: 'rgba(52, 52, 52, 0.8)',
+        // // backgroundColor: 'transparent',
+        // borderRadius: 20,
+        // height: 150,
+        // width: 170
+    },
+
+    // profileCountChartTextPlan: {
+    //     fontSize: 20,
+    //     color: 'green',
+    // },
+    // profileCountChartTextProfiles: {
+    //     fontSize: 20,
+    //     color: '#28334A'
+    // },
+
+
     // searchForm: {
     //     height: 40,
     //     marginTop: 5
