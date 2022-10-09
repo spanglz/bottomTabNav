@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View, Text, TouchableOpacity, Image } from "react-native";
+import {View, Text, TouchableOpacity, Image, Linking} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
 import {Input, Box, Button} from "native-base";
@@ -44,6 +44,10 @@ const LoginScreen = () => {
             });
     }
 
+    const forgotPass = () => {
+        Linking.openURL('https://anty.dolphin.ru.com/en/?reset-password');
+    }
+
     return(
         <View style={{flex: 1, alignContent: 'center', alignItems: 'center', justifyContent: 'center'}}>
             <Image
@@ -54,9 +58,11 @@ const LoginScreen = () => {
                 <Input value={userName} size="xl" onChangeText={setUsername} autoCapitalize='none' mx="3" placeholder="Login" w="70%" variant="rounded" maxLength={30}/>
                 <Input value={userPassword} size="xl" type="password" onChangeText={setUserPassword} mx="3" placeholder="Password" w="70%" variant="rounded" maxLength={30} mt="2"/>
                 <Button mt="4" backgroundColor="purple.600" w="150" h="10"
-                onPress={() => {fetchToken()}}
+                        onPress={() => {fetchToken()}}
                 >SIGN IN</Button>
-                <Button variant="outline" w="150" borderColor="purple.600" colorScheme="purple" mt="2" h="10">Forgot password</Button>
+                <Button variant="outline" w="150" borderColor="purple.600" colorScheme="purple" mt="2" h="10"
+                        onPress={() => {forgotPass()}}
+                >Forgot password</Button>
             </Box>
         </View>
     )
