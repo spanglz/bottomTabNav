@@ -17,12 +17,13 @@ import {
 import ProxyScreen from "../screens/ProxyScreen";
 import {styles} from "../styles/styles";
 import {Dropdown} from "../screens/ProxyScreen";
-
+import LoginScreen from "../screens/LoginScreen";
 
 const Tab = createBottomTabNavigator();
 
 const Tabs = () => {
     return(
+        // здесь начинается навигация, но не нижний бар, а навигация как сущность в проект
         <Tab.Navigator
         screenOptions={{
             tabBarShowLabel: false,
@@ -109,7 +110,7 @@ const Tabs = () => {
                     </View>
                 )
             }}/>
-            <Tab.Screen name={'Add'} component={LibraryScreen} options={{
+            <Tab.Screen name={'Login'} component={LoginScreen} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{
                         ...styles.tabBarView
@@ -123,7 +124,8 @@ const Tabs = () => {
                             ...styles.tabBarText
                         }}>Add</Text>
                     </View>
-                )
+                ),
+                headerShown: false
             }}/>
             <Tab.Screen name={'Proxy'} component={ProxyScreen} options={{
                 tabBarIcon: ({focused}) => (
