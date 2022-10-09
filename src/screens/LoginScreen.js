@@ -1,7 +1,11 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, {useState} from "react";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faUser} from "@fortawesome/free-solid-svg-icons";
+import {Input, Box, Button} from "native-base";
+import axios from "axios";
+import Loader from "../components/Loader";
+import {async} from "@babel/runtime/regenerator";
 
 const LoginScreen = () => {
     return(
