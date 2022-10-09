@@ -1,10 +1,16 @@
 import React, {useState} from "react";
-import {View, Text, RefreshControl, TouchableOpacity, FlatList} from "react-native";
+import {View, Text, RefreshControl, TouchableOpacity, FlatList, ActionSheetIOS} from "react-native";
 import {Checkbox, VStack, Input, Menu, Pressable, Box} from "native-base";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
-import {faEllipsisH} from "@fortawesome/free-solid-svg-icons";
 import {
-    faAngleRight, faEllipsis,
+    faArrowRightArrowLeft,
+    faEllipsisH,
+    faPenToSquare, faSquare,
+    faSquareCheck,
+    faTrash
+} from "@fortawesome/free-solid-svg-icons";
+import {
+    faAngleRight,
     faEthernet,
     faMagnifyingGlass,
     faSocks,
@@ -15,10 +21,12 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import {styles} from "../styles/styles";
 
-export const Dropdown = () => {
+export const ProxyDropdown = () => {
     return <Box w="90%" alignItems="flex-end">
-        <Menu w="190" trigger={triggerProps => {
-            return <Pressable accessibilityLabel="More options menu" {...triggerProps}>
+        <Menu w="190" rounded={'xl'} marginTop={1} marginRight={3} trigger={triggerProps => {
+            return <Pressable accessibilityLabel="More options menu"
+                              hitSlop={{ top: 15, right: 15, bottom: 15, left: 15 }}
+                              {...triggerProps}>
                 <Box>
                     <FontAwesomeIcon
                         icon={faEllipsisH}
@@ -30,9 +38,22 @@ export const Dropdown = () => {
                 </Box>
             </Pressable>;
         }}>
-            <Menu.Item>Arial</Menu.Item>
-            <Menu.Item>Nunito Sans</Menu.Item>
-            <Menu.Item>Roboto</Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faSquareCheck} />
+                Select all
+            </Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faSquare} />
+                Deselect all
+            </Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faArrowRightArrowLeft} />
+                Check
+            </Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faTrash} />
+                Delete
+            </Menu.Item>
         </Menu>
     </Box>;
 }
@@ -110,7 +131,7 @@ const ProxyScreen = ({navigation}) => {
                             {item.type == 'ssh' ? <FontAwesomeIcon icon={faTerminal} style={styles.icon} size={24} /> : null}
                         </View>
                         <View style={styles.profileDetails}>
-                            <Text style={styles.profileName}>{item.name}</Text>
+                            <Text numberOfLines={1} ellipsizeMode={"tail"} style={styles.profileName}>{item.name}</Text>
                         </View>
                         <View style={styles.proxyMoreInfo}>
                             <TouchableOpacity>

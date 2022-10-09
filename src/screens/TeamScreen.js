@@ -1,17 +1,118 @@
 import React, {useState} from "react";
 import {View, Text, RefreshControl, TouchableOpacity, FlatList} from "react-native";
-import {Checkbox, VStack, Input} from "native-base";
+import {Checkbox, VStack, Input, Modal, FormControl, Button, Select, CheckIcon} from "native-base";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {
-    faAngleRight,
-    faEthernet,
-    faMagnifyingGlass, faPeopleGroup,
+    faAngleRight, faAt,
+    faEthernet, faKey,
+    faMagnifyingGlass, faPeopleGroup, faPlus,
     faSocks, faUser, faUserAstronaut, faUserTie
 } from "@fortawesome/free-solid-svg-icons";
 import {useNavigation} from "@react-navigation/native";
 import axios from "axios";
 import Loader from "../components/Loader";
 import {styles} from "../styles/styles";
+
+export const AddUser = () => {
+
+    const [modalVisible, setModalVisible] = React.useState(false);
+    const [displayName, setDisplayName] = React.useState("");
+    const [newUserEmail, setNewUserEmail] = React.useState("");
+    const [newUserPassword, setNewUserPassword] = React.useState("");
+    const [newUserRole, setNewUserRole] = React.useState("");
+
+    function addNewUser(name, mail, password, role) {
+        var axConf = {
+            method: "post",
+            url: "http://185.137.234.75:81/team/users",
+            headers: {
+                Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MTY1Nzg1MywidXNlcm5hbWUiOiJjb21wYW5pb25AYXBwLmNvbSIsInJvbGUiOiJhZG1pbiIsInRlYW1JZCI6MTYwODM4MSwidG9rZW5DcmVhdGVkQXQiOjE2NjQ5MjI1ODV9.gmgWmryWsXZVljgnebrFIlFTfiKbMEJ56_TrO7AVqg4',
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            data: {
+                username: mail,
+                displayName: name,
+                password: password,
+                role: role
+            }
+        };
+        axios(axConf)
+            .then(({ data }) => {
+                console.log(data);
+
+            })
+            .catch((err) => {
+                console.log(err);
+                alert("oshibka");
+            })
+
+    };
+
+    // http://185.137.234.75:81/team/users | POST
+    // {
+    //     "username": "added@app.com",
+    //     "displayName": "Companion added",
+    //     "password": "123123",
+    //     "role": "admin"
+    // }
+
+
+    return(
+        <View>
+            <TouchableOpacity onPress={() => setModalVisible(true)} >
+                <FontAwesomeIcon
+                    icon={faPlus}
+                    size={24}
+                    style={{
+                        left: 20
+                    }}
+                />
+            </TouchableOpacity>
+                <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} avoidKeyboard  size="lg">
+                    <Modal.Content rounded="3xl">
+                        <Modal.CloseButton />
+                        <Modal.Header>Create user</Modal.Header>
+                        <Modal.Body>
+                            <FormControl >
+                                <Input value={displayName} onChangeText={setDisplayName} InputLeftElement={
+                                    <FontAwesomeIcon icon={faUser} size={14} />
+                                }/>
+                            </FormControl>
+                            <FormControl >
+                                <Input value={newUserEmail} onChangeText={setNewUserEmail} mt={5} InputLeftElement={
+                                    <FontAwesomeIcon icon={faAt} size={14} />
+                                }/>
+                            </FormControl>
+                            <FormControl >
+                                <Input value={newUserPassword} onChangeText={setNewUserPassword} fontSize={14} mt={5} InputLeftElement={
+                                    <FontAwesomeIcon icon={faKey} size={14} />
+                                } />
+                            </FormControl>
+                            <Select selectedValue={newUserRole} minWidth="200" accessibilityLabel="Choose Service" placeholder="Choose Service" _selectedItem={{
+                                bg: "purple.400",
+                                rounded: '2xl',
+                                endIcon: <CheckIcon size="5" />
+                            }} mt={1} onValueChange={itemValue => setNewUserRole(itemValue)}>
+                                <Select.Item label="Admin" value="admin" />
+                                <Select.Item label="User" value="user" />
+                            </Select>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button backgroundColor="purple.600" rounded="2xl" flex="1" onPress={() => {
+                                setModalVisible(false);
+                                {console.log(displayName, newUserEmail, newUserPassword, newUserRole)};
+                                addNewUser(displayName, newUserEmail, newUserPassword, newUserRole);
+                            }}>
+                                Proceed
+                            </Button>
+                        </Modal.Footer>
+                    </Modal.Content>
+                </Modal>
+            </View>
+
+        )
+    }
 
 const TeamScreen = ({navigation}) => {
 
@@ -75,7 +176,7 @@ const TeamScreen = ({navigation}) => {
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={fetchProfiles} />}
                 data={items}
                 renderItem={({ item }) => (
-                    <View style={styles.profileItem}>
+                    <View style={styles.teamItem}>
                         <View style={styles.checkbox}>
                             <Checkbox colorScheme="purple" value={toString(item.id)} accessibilityLabel={toString(item.id)}  />
                         </View>

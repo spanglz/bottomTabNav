@@ -13,12 +13,13 @@ export const styles = StyleSheet.create({
     },
     tabBarMain: {
         position: 'absolute',
-        bottom: 25,
-        left: 15,
-        right: 15,
+        bottom: 20,
+        left: 10,
+        right: 10,
         elevation: 0,
         backgroundColor: '#1B2A3A',
-        borderRadius: 30,
+        borderRadius: 25,
+        // border: '1px solid #1B2A3A',
         height: 80
     },
     tabBarView: {
@@ -34,6 +35,7 @@ export const styles = StyleSheet.create({
     container: {
         backgroundColor: '#ECEEF4',
         flex: 1,
+        marginBottom: 100
     },
     profileItem: {
         flexDirection: "row",
@@ -42,13 +44,26 @@ export const styles = StyleSheet.create({
         alignContent: "center",
         padding: 15,
         border: "1 solid black",
+        height: 60,
+        backgroundColor: '#ECEEF4',
+        borderBottomWidth: 0.5,
+        borderColor: 'rgba(138, 50, 207, 0.2)',
+    },
+    teamItem: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        alignContent: "center",
+        padding: 15,
+        border: "1 solid black",
         height: 70,
-        backgroundColor: '#ECEEF4'
+        backgroundColor: '#ECEEF4',
+        borderBottomWidth: 0.5,
+        borderColor: 'rgba(138, 50, 207, 0.2)',
     },
     icon: {
         color: '#414452',
         zIndex: 2
-        // justifyContent: 'center'
     },
     checkbox: {
         flex: 1,
@@ -76,8 +91,10 @@ export const styles = StyleSheet.create({
     },
     profileName: {
         fontSize: 16,
-        fontWeight: "bold",
-        justifyContent: "center"
+        // fontWeight: "bold",
+        justifyContent: "center",
+        overflow: 'hidden',
+        fontFamily: 'Roboto-Regular'
     },
     userName: {
         fontSize: 14,
@@ -90,10 +107,12 @@ export const styles = StyleSheet.create({
     // },
     profileMoreInfo: {
         flex: 5,
-        maxWidth: 10,
+        flexGrow: 1,
+        maxWidth: 25
     },
     proxyMoreInfo: {
-        flex: 5,
+        flex: 4,
+        alignContent: 'flex-end',
         maxWidth: 25,
     },
     accountContainer: {

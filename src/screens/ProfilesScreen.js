@@ -1,14 +1,57 @@
 import React from "react";
 import axios from "axios";
-import {View, Text, FlatList, RefreshControl, TouchableOpacity} from "react-native";
-import {Checkbox, Input, VStack} from "native-base";
+import {View, Text, FlatList, RefreshControl, TouchableOpacity, SafeAreaView, ActionSheetIOS} from "react-native";
+import {Box, Checkbox, Input, Menu, Pressable, VStack} from "native-base";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {faApple, faFacebook, faGoogle, faLinux, faTiktok, faWindows} from "@fortawesome/free-brands-svg-icons";
-import {faAngleRight, faBitcoinSign, faGlobe, faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import {
+    faAngleRight,
+    faBitcoinSign,
+    faEllipsisH,
+    faGlobe,
+    faMagnifyingGlass,
+    faShareNodes, faSquare, faSquareCheck, faTrash
+} from "@fortawesome/free-solid-svg-icons";
 import {useNavigation} from "@react-navigation/native";
 import {styles} from "../styles/styles";
 import Loader from "../components/Loader";
 
+export const ProfileDropdown = () => {
+    return <Box w="90%" alignItems="flex-end">
+        <Menu w="190" rounded={'xl'} marginTop={1} marginRight={3} trigger={triggerProps => {
+            return <Pressable accessibilityLabel="More options menu"
+                              hitSlop={{ top: 15, right: 15, bottom: 15, left: 15 }}
+                              {...triggerProps}>
+                <Box>
+                    <FontAwesomeIcon
+                        icon={faEllipsisH}
+                        size={24}
+                        style={{
+                            right: 20,
+                        }}
+                    />
+                </Box>
+            </Pressable>;
+        }}>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faSquareCheck} />
+                Select all
+            </Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faSquare} />
+                Deselect all
+            </Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faShareNodes} />
+                Share
+            </Menu.Item>
+            <Menu.Item>
+                <FontAwesomeIcon icon={faTrash} />
+                Delete
+            </Menu.Item>
+        </Menu>
+    </Box>;
+}
 
 const ProfilesScreen = ({}) => {
 
@@ -87,7 +130,7 @@ const ProfilesScreen = ({}) => {
                             {item.mainWebsite == '' ? <FontAwesomeIcon icon={faGlobe} style={styles.icon} size={24} /> : null}
                         </View>
                         <View style={styles.profileDetails}>
-                            <Text style={styles.profileName}>{item.name}</Text>
+                            <Text numberOfLines={1} ellipsizeMode={"tail"} style={styles.profileName}>{item.name}</Text>
                         </View>
                         <View style={styles.profileMoreInfo}>
                             <TouchableOpacity>

@@ -1,23 +1,35 @@
 import * as React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import AccountScreen from "../screens/AccountScreen";
-import ProfilesScreen from "../screens/ProfilesScreen";
+import ProfilesScreen, {ProfileDropdown} from "../screens/ProfilesScreen";
 import TeamScreen from "../screens/TeamScreen";
-import LibraryScreen from "../screens/LibraryScreen";
-import {StyleSheet, Text, View, TouchableOpacity} from "react-native";
+import {ActionSheetIOS, Text, TouchableOpacity, View} from "react-native";
 import {FontAwesomeIcon} from "@fortawesome/react-native-fontawesome";
 import {
     faCirclePlus, faEllipsis,
-    faEllipsisVertical, faFilter,
+    faFilter,
     faGear,
     faLink, faPersonHarassing, faPlus,
     faUser,
     faWindowRestore
 } from "@fortawesome/free-solid-svg-icons";
-import ProxyScreen from "../screens/ProxyScreen";
+import ProxyScreen, {ProxyDropdown} from "../screens/ProxyScreen";
 import {styles} from "../styles/styles";
-import {Dropdown} from "../screens/ProxyScreen";
+import AddAnything from "../components/AddAnything";
+import {AddUser} from "../screens/TeamScreen";
 
+const filtersOpen = () =>
+    ActionSheetIOS.showActionSheetWithOptions(
+        {
+            options: ['Cancel', 'Remove'],
+            destructiveButtonIndex: 1,
+            cancelButtonIndex: 0
+        },
+        (buttonIndex) => {
+            if (buttonIndex === 1) {
+                /* destructive action */
+            }
+        })
 
 const Tab = createBottomTabNavigator();
 
@@ -49,17 +61,12 @@ const Tabs = () => {
                 ),
                 headerRight: () => (
                     <View>
-                        <FontAwesomeIcon
-                            icon={faEllipsis}
-                            size={24}
-                            style={{
-                                right: 20,
-                            }}
-                        />
+                        <ProfileDropdown />
                     </View>
                 ),
                 headerLeft: () => (
                     <View>
+                        <TouchableOpacity onPress={filtersOpen}>
                         <FontAwesomeIcon
                             icon={faFilter}
                             size={24}
@@ -67,6 +74,7 @@ const Tabs = () => {
                                 left: 20
                             }}
                         />
+                        </TouchableOpacity>
                     </View>
                 )
             }}
@@ -98,18 +106,10 @@ const Tabs = () => {
                     </View>
                 ),
                 headerLeft: () => (
-                    <View>
-                        <FontAwesomeIcon
-                            icon={faPlus}
-                            size={24}
-                            style={{
-                                left: 20
-                            }}
-                        />
-                    </View>
+                    <AddUser />
                 )
             }}/>
-            <Tab.Screen name={'Add'} component={LibraryScreen} options={{
+            <Tab.Screen name={'Add'} component={AddAnything} options={{
                 tabBarIcon: ({focused}) => (
                     <View style={{
                         ...styles.tabBarView
@@ -141,7 +141,7 @@ const Tabs = () => {
                     </View>
                 ),
                 headerRight: () => (
-                        <Dropdown />
+                        <ProxyDropdown />
                 ),
                 headerLeft: () => (
                     <View>
