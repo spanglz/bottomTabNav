@@ -51,8 +51,8 @@ const LoginScreen = () => {
                 source={require('../img/logo.png')}
                 style={{ height: 70 }}/>
             <Box alignItems="center">
-                <Input value={userName} onChangeText={setUsername} autoCapitalize='none' mx="3" placeholder="Login" w="70%" variant="rounded" maxLength={30}/>
-                <Input value={userPassword} type="password" onChangeText={setUserPassword} mx="3" placeholder="Email" w="70%" variant="rounded" maxLength={30} mt="2"/>
+                <Input value={userName} size="xl" onChangeText={setUsername} autoCapitalize='none' mx="3" placeholder="Login" w="70%" variant="rounded" maxLength={30}/>
+                <Input value={userPassword} size="xl" type="password" onChangeText={setUserPassword} mx="3" placeholder="Password" w="70%" variant="rounded" maxLength={30} mt="2"/>
                 <Button mt="4" backgroundColor="purple.600" w="150" h="10"
                 onPress={() => {fetchToken()}}
                 >SIGN IN</Button>
